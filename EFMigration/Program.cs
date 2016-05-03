@@ -25,6 +25,7 @@ namespace EFMigration
 
 	class MainClass
 	{
+		/*
 		public static void Main (string [] args)
 		{
 			//Database.SetInitializer<EFContext> (new MigrateDatabaseToLatestVersion<EFContext, Configuration> ());
@@ -34,5 +35,6 @@ namespace EFMigration
 				context.SaveChanges ();
 			}
 		}
+*/
 	}
 }

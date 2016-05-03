@@ -3,16 +3,13 @@ using NUnit.Framework;
 using System.Configuration;
 using System.Data.Entity;
 using System.IO;
+using System.Reflection;
 
 namespace EFMigration.Tests
 {
+	[TestFixture]
 	public class DbSpec
 	{
-		static DbSpec ()
-		{
-			AppDomain.CurrentDomain.SetData ("APP_CONFIG_FILE", "/Users/wk/Source/ef/EFMigration/EFMigration.Tests/bin/Debug/EFMigration.Tests.dll.config");
-		}
-
 		[Test]
 		public void ShouldCreateSchema ()
 		{
@@ -24,17 +21,23 @@ namespace EFMigration.Tests
 		}
 
 		[Test]
+		public void ShouldMigrateDb ()
+		{
+
+		}
+
+		[Test]
 		public void ShouldGetConfigFile ()
 		{
 			var config = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-			Assert.Fail (config);
+			Assert.True (config.Contains ("bin/Debug"));
 		}
 
 		[Test]
 		public void ShouldGetConfigFile2 ()
 		{
-			var config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
-			Assert.Fail (config.FilePath);
+			var config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None).FilePath;
+			Assert.True (config.Contains ("bin/Debug"));
 		}
 	}
 }
