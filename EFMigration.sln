@@ -1,0 +1,28 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFMigration", "EFMigration\EFMigration.csproj", "{ACE4C8BB-7A3E-405C-B95C-7E05AA8FDE35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFMigration.Tests", "EFMigration.Tests\EFMigration.Tests.csproj", "{17A07DA3-9ABC-4327-BA08-844CB7E585FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8FA164E8-4802-4A53-B9FF-3613FFF5B81D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACE4C8BB-7A3E-405C-B95C-7E05AA8FDE35}.Debug|x86.ActiveCfg = Debug|x86
+		{ACE4C8BB-7A3E-405C-B95C-7E05AA8FDE35}.Debug|x86.Build.0 = Debug|x86
+		{ACE4C8BB-7A3E-405C-B95C-7E05AA8FDE35}.Release|x86.ActiveCfg = Release|x86
+		{ACE4C8BB-7A3E-405C-B95C-7E05AA8FDE35}.Release|x86.Build.0 = Release|x86
+		{17A07DA3-9ABC-4327-BA08-844CB7E585FC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{17A07DA3-9ABC-4327-BA08-844CB7E585FC}.Debug|x86.Build.0 = Debug|Any CPU
+		{17A07DA3-9ABC-4327-BA08-844CB7E585FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{17A07DA3-9ABC-4327-BA08-844CB7E585FC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
