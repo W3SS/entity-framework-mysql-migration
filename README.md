@@ -14,7 +14,7 @@ public class Customer {
 ```
 
 - เป็นคำสั่ง Enable migration โดยจะพิมพ์คำสั่งนี้ใน `Package manager console`
-- Context จะต้องมี Default constructor เพิ่มให้โปรแกรมสามารถอ่าน Property
+- Context จะต้องมี Default constructor เพิ่อให้โปรแกรมสามารถเข้าไปอ่าน Property
 
 #### `Add-Migration Initilize -ConnectionStringName mac`
 
@@ -49,7 +49,7 @@ public class Customer {
 
 #### `Update-Database -Script -SourceMigration: Initial -TargetMigration: AddAgeAndTelephone -ConnectionStringName mac`
 
-- Gen sql script สำหรับเฉพาะส่วนที่มีการ Update
+- Gen sql script เฉพาะส่วนที่มีการ Update
 
 ```sql
 alter table `Customers` add column `Age` int not null  
