@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.Entity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
@@ -12,10 +13,18 @@ namespace EFMigration
 
 		public string FirstName { set; get; }
 		public string LastName { set; get; }
+        public int Age { set; get; }
+        public int Telephone { set; get; }
 	}
 
-	public class EFContext : DbContext
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
+    public class EFContext : DbContext
 	{
+        public EFContext()
+        {
+
+        }
+
 		public EFContext (string connName):base (connName) {
 			
 		}

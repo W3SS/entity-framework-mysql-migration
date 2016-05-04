@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -54,12 +54,29 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201605040632402_Initial.cs" />
+    <Compile Include="Migrations\201605040632402_Initial.Designer.cs">
+      <DependentUpon>201605040632402_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605040639534_AddAgeAndTelephone.cs" />
+    <Compile Include="Migrations\201605040639534_AddAgeAndTelephone.Designer.cs">
+      <DependentUpon>201605040639534_AddAgeAndTelephone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605040632402_Initial.resx">
+      <DependentUpon>201605040632402_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605040639534_AddAgeAndTelephone.resx">
+      <DependentUpon>201605040639534_AddAgeAndTelephone.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

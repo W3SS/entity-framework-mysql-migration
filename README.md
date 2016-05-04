@@ -1,5 +1,53 @@
-## Code First Migrations
+## Code First Migrations (Visual Studio)
 
+### `Enable-Migrations –EnableAutomaticMigrations`
+
+```csharp
+public class Customer {
+    [Key]
+    public int Id { set; get; }
+    public string FirstName { set; get; }
+    public string LastName { set; get; }
+    public int Age { set; get; }
+    public int Telephone { set; get; }
+}
+```
+
+- เป็นคำสั่ง Enable migration โดยจะพิมพ์คำสั่งนี้ใน `Package manager console`
+- Context จะต้องมี Default constructor เพิ่มให้โปรแกรมสามารถอ่าน Property
+
+### `Add-Migration Initilize -ConnectionStringName mac`
+
+### `Update-Database -ConnectionStringName mac`
+
+- Update ฐานข้อมูล
+- ครั้งแรกจะมี Error `No MigrationSqlGenerator`
+- `No MigrationSqlGenerator found for provider 'MySql.Data.MySqlClient'. Use the SetSqlGenerator method in the target migrations configuration class to register additional SQL generators.`
+- ต้องเพิ่มคำสั่ง `SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator())` ในไฟล์ `Migrations\Configration.cs`
+- รันคำสั่งใหม่อีกครั้ง
+
+### `Add-Migration AddAgeAndTelephone -ConnectionStringName mac`
+
+- พิมพ์คำสั่งนี้หลังจากแก้ไข Entity class เช่น เพิ่ม Field Age ใน Table Customer
+
+```csharp
+public class Customer {
+    [Key]
+    public int Id { set; get; }
+    public string FirstName { set; get; }
+    public string LastName { set; get; }
+    public int Age { set; get; }
+    public int Telephone { set; get; }
+}
+```
+
+### `Update-Database -ConnectionStringName mac`
+
+- Update ฐานข้อมูลอีกครั้ง
+
+### Gen Script
+
+- `Update-Database -Script -SourceMigration: Initial -TargetMigration: AddAgeAndTelephone -ConnectionStringName mac`
 
 ## Issue
 
@@ -38,3 +86,5 @@ nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll
 - https://romiller.com/2012/02/09/running-scripting-migrations-from-code/
 - https://msdn.microsoft.com/en-us/data/jj591621
 - https://channel9.msdn.com/Blogs/EF/Migrations-Existing-Databases
+- http://webandlife.blogspot.com/2015/07/code-first-migrations-with-entity.html
+- http://www.thinkprogramming.co.uk/post/code-first-with-mysql-and-entity-framework-6
