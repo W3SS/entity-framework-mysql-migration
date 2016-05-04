@@ -11,10 +11,18 @@ public class Customer {
     public int Age { set; get; }
     public int Telephone { set; get; }
 }
+
+public class EFContext : DbContext {
+    public EFContext() { }
+    public EFContext (string connName):base (connName) { }
+    public DbSet<Customer> Customers { set; get; }
+}
+
 ```
 
 - เป็นคำสั่ง Enable migration โดยจะพิมพ์คำสั่งนี้ใน `Package manager console`
-- Context จะต้องมี Default constructor เพิ่อให้โปรแกรมสามารถเข้าไปอ่าน Property
+- Context จะต้องมี Default constructor เพื่อให้โปรแกรมสามารถเข้าไปอ่าน Property
+- ถ้าต้องการ Migration โดยเริ่มจากฐานข้อมูลที่มี Table อยู่แล้ว ให้เพ่ิม ` –IgnoreChange` เพื่อ Ignore Creation Script 
 
 #### `Add-Migration Initilize -ConnectionStringName mac`
 
