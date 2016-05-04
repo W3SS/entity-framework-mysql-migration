@@ -1,6 +1,6 @@
 ## Code First Migrations (Visual Studio)
 
-### `Enable-Migrations –EnableAutomaticMigrations`
+#### `Enable-Migrations –EnableAutomaticMigrations`
 
 ```csharp
 public class Customer {
@@ -16,9 +16,11 @@ public class Customer {
 - เป็นคำสั่ง Enable migration โดยจะพิมพ์คำสั่งนี้ใน `Package manager console`
 - Context จะต้องมี Default constructor เพิ่มให้โปรแกรมสามารถอ่าน Property
 
-### `Add-Migration Initilize -ConnectionStringName mac`
+#### `Add-Migration Initilize -ConnectionStringName mac`
 
-### `Update-Database -ConnectionStringName mac`
+- สร้าง Migration ครั้งแรกโปรแกรมจะ Gen code สำหรับ Create table
+
+#### `Update-Database -ConnectionStringName mac`
 
 - Update ฐานข้อมูล
 - ครั้งแรกจะมี Error `No MigrationSqlGenerator`
@@ -26,7 +28,7 @@ public class Customer {
 - ต้องเพิ่มคำสั่ง `SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator())` ในไฟล์ `Migrations\Configration.cs`
 - รันคำสั่งใหม่อีกครั้ง
 
-### `Add-Migration AddAgeAndTelephone -ConnectionStringName mac`
+#### `Add-Migration AddAgeAndTelephone -ConnectionStringName mac`
 
 - พิมพ์คำสั่งนี้หลังจากแก้ไข Entity class เช่น เพิ่ม Field Age ใน Table Customer
 
@@ -41,23 +43,29 @@ public class Customer {
 }
 ```
 
-### `Update-Database -ConnectionStringName mac`
+#### `Update-Database -ConnectionStringName mac`
 
 - Update ฐานข้อมูลอีกครั้ง
 
-### Gen Script
+#### `Update-Database -Script -SourceMigration: Initial -TargetMigration: AddAgeAndTelephone -ConnectionStringName mac`
 
-- `Update-Database -Script -SourceMigration: Initial -TargetMigration: AddAgeAndTelephone -ConnectionStringName mac`
+- Gen sql script สำหรับเฉพาะส่วนที่มีการ Update
 
-## Issue
+```sql
+alter table `Customers` add column `Age` int not null  
+alter table `Customers` add column `Telephone` int not null  
+alter table `Customers` modify `FirstName` longtext
+alter table `Customers` modify `LastName` longtext
+```
+
+## Issue กรณีรัน Unit test บน Xamarin Studio
 
 - Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
 - ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
 - `/Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.UnitTesting/NUnit2/EFMigration.Tests.dll.config`  
 - แทนที่จะเป็น `./EFMigration.Tests/bin/Debug/EFMigration.Tests.dll.config`
 
-
-### โค้ดที่ใช้แสดง Path ของไฟล์ Config
+#### โค้ดที่ใช้แสดง Path ของไฟล์ Config
 
 ```csharp
 [Test]
@@ -71,7 +79,7 @@ public void ShouldGetConfigFile2 ()
 - ปัญหานี้จะไม่เจอเมื่อรันโปรแกรมแบบ ConsoleApplication หรือรันด้วย Test runner ของ VisualStudio
 - คาดว่าน่าจะเป็น Bug test runner ของ Xamarin Studio
 
-### แก้ไข
+#### แก้ไข
 
 - แก้เบื้องต้นโดย Test ผ่าน Command line
 
