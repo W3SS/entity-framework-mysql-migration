@@ -24,10 +24,7 @@ public class EFContext : DbContext {
 - Context จะต้องมี Default constructor เพื่อให้โปรแกรมสามารถเข้าไปอ่าน Property
 - ถ้าต้องการ Migration โดยเริ่มจากฐานข้อมูลที่มี Table อยู่แล้ว ให้เพิ่ม –IgnoreChange เพื่อ Ignore creation script
 - ในกรณีที่ Context ประกาศไว้ที่ Assembly อื่น สามารถใช้ Flag -ContextAssemblyName เพื่อระบบชื่อ Dll ได้ เช่น
-
-```
-Enable-Migrations -ContextAssemblyName DbEntity -Verbose
-```
+- Enable-Migrations -ContextAssemblyName DbEntity -Verbose
 
 #### `Add-Migration Initilize -ConnectionStringName mac`
 
@@ -75,18 +72,17 @@ alter table `Customers` modify `LastName` longtext
 
 #### Issue - คำสั่ง Enable-Migrations ไม่มี -ContextAssemblyName
 
-Help Enable-Migrations ไม่มี Option -ContextAssemblyName
+- Help Enable-Migrations ไม่มี Option -ContextAssemblyName
 
 ```powershell
-SYNTAX
-    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
-    [-ContextProjectName <String>] [-ConnectionStringName <String>] [-Force] [<CommonParameters>]
+Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+[-ContextProjectName <String>] [-ConnectionStringName <String>] [-Force] [<CommonParameters>]
 
-    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
-    [-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [<CommonParameters>]
+Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+[-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [<CommonParameters>]
 ```
 
-ไม่สามารถระบุชื่อ Assembly ได้
+- ไม่สามารถระบุชื่อ Assembly ได้
 
 ```powershell
 Enable-Migrations -ContextAssemblyName DbEntity -ProjectName DbEntity.Migrations -Verbose
@@ -98,37 +94,24 @@ At line:1 char:19
     + FullyQualifiedErrorId : NamedParameterNotFound,Enable-Migrations
 ```
 
-ปกติเวลารัน Help Enable-Migrations ต้องได้
+- ปกติเวลารัน Help Enable-Migrations ต้องได้
 
 ```powershell
-SYNTAX
-    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
-    [-ContextProjectName <String>] [-ConnectionStringName <String>] [-Force] [-ContextAssemblyName <String>] [-AppDomainBaseDirectory <String>] [<CommonParameters>]
+Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+[-ContextProjectName <String>] [-ConnectionStringName <String>] [-Force] [-ContextAssemblyName <String>] [-AppDomainBaseDirectory <String>] [<CommonParameters>]
 
-    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
-    [-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [-ContextAssemblyName <String>] [-AppDomainBaseDirectory
-    <String>] [<CommonParameters>]
+Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+[-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [-ContextAssemblyName <String>] [-AppDomainBaseDirectory
+<String>] [<CommonParameters>]
 ```
-
-แก้ไข
 
 - ยังไม่ทราบสาเหตุ แก้ไขเบื้องต้นโดยการสร้าง Solution ว่าง ๆ แล้ว Import Project เข้าไปใหม่
 
-
 #### Issue - Invalid for use as a key column in an index
 
-ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
-
-```
-Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
-```
-
-```fsharp
-[<Index>]
-member val Guid = String.Empty with get, set
-```
-
-แก้ไขโดยเพิ่ม StringLength
+- ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
+- Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
+- แก้ไขโดยเพิ่ม StringLength
 
 ```fsharp
 [<Index>]
@@ -138,13 +121,6 @@ member val Guid = String.Empty with get, set
 
 #### Issue - กรณีรัน Unit test บน Xamarin Studio
 
-- Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
-- ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
-- /Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.UnitTesting/NUnit2/EFMigration.Tests.dll.config
-- แทนที่จะเป็น ./EFMigration.Tests/bin/Debug/EFMigration.Tests.dll.config
-
-โค้ดที่ใช้แสดง Path ของไฟล์ Config
-
 ```csharp
 [Test]
 public void ShouldGetConfigFile2 () {
@@ -153,11 +129,12 @@ public void ShouldGetConfigFile2 () {
 }
 ```
 
+- Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
+- ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
+- /Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.UnitTesting/NUnit2/EFMigration.Tests.dll.config
+- แทนที่จะเป็น ./EFMigration.Tests/bin/Debug/EFMigration.Tests.dll.config
 - ปัญหานี้จะไม่เจอเมื่อรันโปรแกรมแบบ ConsoleApplication หรือรันด้วย Test runner ของ VisualStudio
 - คาดว่าน่าจะเป็น Bug test runner ของ Xamarin Studio
-
-แก้ไข
-
 - แก้เบื้องต้นโดย Test ผ่าน Command line
 
 ```
