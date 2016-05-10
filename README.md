@@ -69,7 +69,7 @@ alter table `Customers` modify `FirstName` longtext
 alter table `Customers` modify `LastName` longtext
 ```
 
-## Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName`
+#### Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName`
 
 `Help Enable-Migrations` ไม่มี Option `-ContextAssemblyName`
 
@@ -106,12 +106,12 @@ SYNTAX
     <String>] [<CommonParameters>]
 ```
 
-#### แก้ไข
+แก้ไข
 
 - ยังไม่ทราบสาเหตุ แก้ไขเบื้องต้นโดยการสร้าง Solution ว่าง ๆ แล้ว Import Project เข้าไปใหม่
 
 
-## Issue `Invalid for use as a key column in an index`
+#### Issue `Invalid for use as a key column in an index`
 
 ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
 
@@ -130,7 +130,7 @@ member val Guid = String.Empty with get, set
 member val Guid = String.Empty with get, set
 ```
 
-## Issue กรณีรัน Unit test บน Xamarin Studio
+#### Issue กรณีรัน Unit test บน Xamarin Studio
 
 - Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
 - ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
@@ -156,7 +156,7 @@ public void ShouldGetConfigFile2 () {
 
 > nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll
 
-## Link
+#### Link
 
 - https://corengen.wordpress.com/2010/01/22/nunit-and-application-configuration-files
 - https://msdn.microsoft.com/en-us/data/jj591621.aspx
