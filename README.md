@@ -71,7 +71,7 @@ alter table `Customers` modify `LastName` longtext
 
 ## Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName "DbEntity"`
 
-- ใช้คำสั่ง `Help Enable-Migrations` ปรากฏว่าไม่มี Option `-ContextAssemblyName`
+#### ใช้คำสั่ง `Help Enable-Migrations` ปรากฏว่าไม่มี Option `-ContextAssemblyName`
 
 ```powershell
 SYNTAX
@@ -82,7 +82,7 @@ SYNTAX
     [-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [<CommonParameters>]
 ```
 
-- ทำให้ไม่สามารถระบุชื่อ `Assembly` ได้
+#### ทำให้ไม่สามารถระบุชื่อ `Assembly` ได้
 
 ```powershell
 Enable-Migrations -ContextAssemblyName DbEntity -ProjectName DbEntity.Migrations -Verbose
@@ -94,7 +94,7 @@ At line:1 char:19
     + FullyQualifiedErrorId : NamedParameterNotFound,Enable-Migrations
 ```
 
-- ปกติ `Help Enable-Migrations` จะได้
+#### ปกติ `Help Enable-Migrations` จะได้
 
 ```powershell
 SYNTAX
