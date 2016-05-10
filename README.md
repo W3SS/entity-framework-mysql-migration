@@ -71,7 +71,7 @@ alter table `Customers` modify `LastName` longtext
 
 ## Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName`
 
-#### `Help Enable-Migrations` ไม่มี Option `-ContextAssemblyName`
+`Help Enable-Migrations` ไม่มี Option `-ContextAssemblyName`
 
 ```powershell
 SYNTAX
@@ -82,7 +82,7 @@ SYNTAX
     [-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [<CommonParameters>]
 ```
 
-#### ทำให้ไม่สามารถระบุชื่อ `Assembly` ได้
+ไม่สามารถระบุชื่อ `Assembly` ได้
 
 ```powershell
 Enable-Migrations -ContextAssemblyName DbEntity -ProjectName DbEntity.Migrations -Verbose
@@ -94,7 +94,7 @@ At line:1 char:19
     + FullyQualifiedErrorId : NamedParameterNotFound,Enable-Migrations
 ```
 
-#### ปกติ `Help Enable-Migrations` ต้องได้
+ปกติ `Help Enable-Migrations` ต้องได้
 
 ```powershell
 SYNTAX
@@ -113,16 +113,16 @@ SYNTAX
 
 ## Issue `Invalid for use as a key column in an index`
 
-> Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
+ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
 
-#### ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
+> Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
 
 ```fsharp
 [<Index>]
 member val Guid = String.Empty with get, set
 ```
 
-#### แก้ไขโดยเพิ่ม `StringLength`
+แก้ไขโดยเพิ่ม `StringLength`
 
 ```fsharp
 [<Index>]
@@ -132,13 +132,12 @@ member val Guid = String.Empty with get, set
 
 ## Issue กรณีรัน Unit test บน Xamarin Studio
 
-
 - Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
 - ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
 - `/Applications/Xamarin Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.UnitTesting/NUnit2/EFMigration.Tests.dll.config`  
 - แทนที่จะเป็น `./EFMigration.Tests/bin/Debug/EFMigration.Tests.dll.config`
 
-#### โค้ดที่ใช้แสดง Path ของไฟล์ Config
+โค้ดที่ใช้แสดง Path ของไฟล์ Config
 
 ```csharp
 [Test]
@@ -151,7 +150,7 @@ public void ShouldGetConfigFile2 () {
 - ปัญหานี้จะไม่เจอเมื่อรันโปรแกรมแบบ ConsoleApplication หรือรันด้วย Test runner ของ VisualStudio
 - คาดว่าน่าจะเป็น Bug test runner ของ Xamarin Studio
 
-#### แก้ไข
+แก้ไข
 
 - แก้เบื้องต้นโดย Test ผ่าน Command line
 
