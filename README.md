@@ -105,7 +105,8 @@ Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-Mig
 <String>] [<CommonParameters>]
 ```
 
-- ยังไม่ทราบสาเหตุ แก้ไขเบื้องต้นโดยการสร้าง Solution ว่าง ๆ แล้ว Import Project เข้าไปใหม่
+- ~~ยังไม่ทราบสาเหตุ แก้ไขเบื้องต้นโดยการสร้าง Solution ว่าง ๆ แล้ว Import Project เข้าไปใหม่~~
+- เกิดจากมีบางโปรเจคยังใช้ EntityFramework 6.0.0 แก้ไขโดยอัปเดตเป็นเวอร์ชัน 6.1.3
 
 #### Issue - Invalid for use as a key column in an index
 
@@ -136,13 +137,11 @@ public void ShouldGetConfigFile2 () {
 - ปัญหานี้จะไม่เจอเมื่อรันโปรแกรมแบบ ConsoleApplication หรือรันด้วย Test runner ของ VisualStudio
 - คาดว่าน่าจะเป็น Bug test runner ของ Xamarin Studio
 - แก้เบื้องต้นโดย Test ผ่าน Command line
-
-```
-nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll
-```
+- `nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll`
 
 ## Link
 
+- https://coding.abel.nu/2012/03/ef-migrations-command-reference
 - https://corengen.wordpress.com/2010/01/22/nunit-and-application-configuration-files
 - https://msdn.microsoft.com/en-us/data/jj591621.aspx
 - https://romiller.com/2012/02/09/running-scripting-migrations-from-code/
