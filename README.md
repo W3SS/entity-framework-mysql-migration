@@ -1,4 +1,4 @@
-## Code First Migrations (Visual Studio)
+# Code First Migrations (Visual Studio)
 
 #### `Enable-Migrations –EnableAutomaticMigrations`
 
@@ -69,9 +69,9 @@ alter table `Customers` modify `FirstName` longtext
 alter table `Customers` modify `LastName` longtext
 ```
 
-## Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName "DbEntity"`
+# Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName`
 
-#### ใช้คำสั่ง `Help Enable-Migrations` ปรากฏว่าไม่มี Option `-ContextAssemblyName`
+#### `Help Enable-Migrations` ไม่มี Option `-ContextAssemblyName`
 
 ```powershell
 SYNTAX
@@ -94,7 +94,7 @@ At line:1 char:19
     + FullyQualifiedErrorId : NamedParameterNotFound,Enable-Migrations
 ```
 
-#### ปกติ `Help Enable-Migrations` จะได้
+#### ปกติ `Help Enable-Migrations` ต้องได้
 
 ```powershell
 SYNTAX
@@ -106,7 +106,32 @@ SYNTAX
     <String>] [<CommonParameters>]
 ```
 
-## Issue กรณีรัน Unit test บน Xamarin Studio
+#### แก้ไข
+
+- ยังไม่ทราบสาเหตุ แก้ไขเบื้องต้นโดยการสร้าง Solution ว่าง ๆ แล้ว Import Project เข้าไปใหม่
+
+
+# Issue `Invalid for use as a key column in an index`
+
+> Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
+
+#### ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
+
+```fsharp
+[<Index>]
+member val Guid = String.Empty with get, set
+```
+
+### แก้ไขโดยเพิ่ม `StringLength`
+
+```
+[<Index>]
+[<StringLength(50)>]
+member val Guid = String.Empty with get, set
+```
+
+# Issue กรณีรัน Unit test บน Xamarin Studio
+
 
 - Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
 - ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
@@ -130,11 +155,9 @@ public void ShouldGetConfigFile2 () {
 
 - แก้เบื้องต้นโดย Test ผ่าน Command line
 
-```
-nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll
-```
+> nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll
 
-## Link
+# Link
 
 - https://corengen.wordpress.com/2010/01/22/nunit-and-application-configuration-files
 - https://msdn.microsoft.com/en-us/data/jj591621.aspx
