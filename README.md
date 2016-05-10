@@ -22,7 +22,10 @@ public class EFContext : DbContext {
 
 - เป็นคำสั่ง Enable migration โดยจะพิมพ์คำสั่งนี้ใน `Package manager console`
 - Context จะต้องมี Default constructor เพื่อให้โปรแกรมสามารถเข้าไปอ่าน Property
-- ถ้าต้องการ Migration โดยเริ่มจากฐานข้อมูลที่มี Table อยู่แล้ว ให้เพ่ิม ` –IgnoreChange` เพื่อ Ignore Creation Script 
+- ถ้าต้องการ Migration โดยเริ่มจากฐานข้อมูลที่มี Table อยู่แล้ว ให้เพ่ิม ` –IgnoreChange` เพื่อ Ignore Creation Script
+- ในกรณีที่ Context ประกาศไว้ที่ Assembly อื่น สามารถใช้ Flag `-ContextAssemblyName` เพื่อระบบชื่อ `Dll` ได้ เช่น
+
+> Enable-Migrations -ContextAssemblyName DbEntity -Verbose
 
 #### `Add-Migration Initilize -ConnectionStringName mac`
 
@@ -66,6 +69,43 @@ alter table `Customers` modify `FirstName` longtext
 alter table `Customers` modify `LastName` longtext
 ```
 
+## Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName "DbEntity"`
+
+- ใช้คำสั่ง `Help Enable-Migrations` ปรากฏว่าไม่มี Option `-ContextAssemblyName`
+
+```powershell
+SYNTAX
+    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+    [-ContextProjectName <String>] [-ConnectionStringName <String>] [-Force] [<CommonParameters>]
+
+    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+    [-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [<CommonParameters>]
+```
+
+- ทำให้ไม่สามารถระบุชื่อ `Assembly` ได้
+
+```powershell
+Enable-Migrations -ContextAssemblyName DbEntity -ProjectName DbEntity.Migrations -Verbose
+Enable-Migrations : A parameter cannot be found that matches parameter name 'ContextAssemblyName'.
+At line:1 char:19
++ Enable-Migrations -ContextAssemblyName DbEntity -ProjectName DbEntity ...
++                   ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Enable-Migrations], ParameterBindingException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Enable-Migrations
+```
+
+- ปกติ `Help Enable-Migrations` จะได้
+
+```powershell
+SYNTAX
+    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+    [-ContextProjectName <String>] [-ConnectionStringName <String>] [-Force] [-ContextAssemblyName <String>] [-AppDomainBaseDirectory <String>] [<CommonParameters>]
+
+    Enable-Migrations [-ContextTypeName <String>] [-EnableAutomaticMigrations] [-MigrationsDirectory <String>] [-ProjectName <String>] [-StartUpProjectName <String>]
+    [-ContextProjectName <String>] -ConnectionString <String> -ConnectionProviderName <String> [-Force] [-ContextAssemblyName <String>] [-AppDomainBaseDirectory
+    <String>] [<CommonParameters>]
+```
+
 ## Issue กรณีรัน Unit test บน Xamarin Studio
 
 - Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
@@ -77,8 +117,7 @@ alter table `Customers` modify `LastName` longtext
 
 ```csharp
 [Test]
-public void ShouldGetConfigFile2 ()
-{
+public void ShouldGetConfigFile2 () {
     var config = ConfigurationManager.OpenExeConfiguration (ConfigurationUserLevel.None);
     Assert.Fail (config.FilePath);
 }
