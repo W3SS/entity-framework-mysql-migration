@@ -22,10 +22,12 @@ public class EFContext : DbContext {
 
 - เป็นคำสั่ง Enable migration โดยจะพิมพ์คำสั่งนี้ใน `Package manager console`
 - Context จะต้องมี Default constructor เพื่อให้โปรแกรมสามารถเข้าไปอ่าน Property
-- ถ้าต้องการ Migration โดยเริ่มจากฐานข้อมูลที่มี Table อยู่แล้ว ให้เพ่ิม ` –IgnoreChange` เพื่อ Ignore Creation Script
+- ถ้าต้องการ Migration โดยเริ่มจากฐานข้อมูลที่มี Table อยู่แล้ว ให้เพิ่ม ` –IgnoreChange` เพื่อ Ignore Creation Script
 - ในกรณีที่ Context ประกาศไว้ที่ Assembly อื่น สามารถใช้ Flag `-ContextAssemblyName` เพื่อระบบชื่อ `Dll` ได้ เช่น
 
-> Enable-Migrations -ContextAssemblyName DbEntity -Verbose
+```
+Enable-Migrations -ContextAssemblyName DbEntity -Verbose
+```
 
 #### `Add-Migration Initilize -ConnectionStringName mac`
 
@@ -69,7 +71,9 @@ alter table `Customers` modify `FirstName` longtext
 alter table `Customers` modify `LastName` longtext
 ```
 
-#### Issue คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName`
+## Issues
+
+#### คำสั่ง `Enable-Migrations` ไม่มี `-ContextAssemblyName`
 
 `Help Enable-Migrations` ไม่มี Option `-ContextAssemblyName`
 
@@ -111,11 +115,13 @@ SYNTAX
 - ยังไม่ทราบสาเหตุ แก้ไขเบื้องต้นโดยการสร้าง Solution ว่าง ๆ แล้ว Import Project เข้าไปใหม่
 
 
-#### Issue `Invalid for use as a key column in an index`
+#### `Invalid for use as a key column in an index`
 
 ไม่สามารถเพิ่ม Index ไปยัง Field ที่ต้องการเนื่องจาก Type ของ Field นั้นไม่ถูกต้อง
 
-> Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
+```
+Column 'Guid' in table 'dbo.DbFileInfoes' is of a type that is invalid for use as a key column in an index.
+```
 
 ```fsharp
 [<Index>]
@@ -130,7 +136,7 @@ member val Guid = String.Empty with get, set
 member val Guid = String.Empty with get, set
 ```
 
-#### Issue กรณีรัน Unit test บน Xamarin Studio
+#### กรณีรัน Unit test บน Xamarin Studio
 
 - Test Runner ของ Xamarin Studio อ่าน Config ไฟล์ผิดที่
 - ถ้าแสดงไฟล์ Config ปัจจุบันจะได้ Config อยู่ที่
@@ -156,7 +162,7 @@ public void ShouldGetConfigFile2 () {
 
 > nunit-console2 EFMigration.Tests/bin/Debug/EFMigration.Tests.dll
 
-#### Link
+## Link
 
 - https://corengen.wordpress.com/2010/01/22/nunit-and-application-configuration-files
 - https://msdn.microsoft.com/en-us/data/jj591621.aspx
